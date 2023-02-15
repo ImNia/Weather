@@ -18,7 +18,6 @@ class MainPresenter: CallbackModel {
     }
 
     fun updateData() {
-        view?.showProgressBar()
         val locationData = view?.getLocation()
 //        (longitude, latitude)
         if(locationData?.first != null || locationData?.second != null) {
@@ -27,7 +26,6 @@ class MainPresenter: CallbackModel {
     }
 
     override fun successful(data: WeatherInfo) {
-        view?.hideProgressBar()
         view?.updateView(data.temp, data.place, data.date, iconToCode(data.weatherToIcon))
     }
 

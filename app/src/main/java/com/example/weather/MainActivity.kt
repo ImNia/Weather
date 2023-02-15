@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         mainPresenter.attachView(this)
 
         binding.updateButton.setOnClickListener {
-            mainPresenter.updateData()
+            clickUpdate()
         }
 
         binding.russianFederationFlag.setOnClickListener {
@@ -36,6 +36,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.usaFlag.setOnClickListener {
             println("Click on USA")
+        }
+
+        binding.swipeUpdate.setOnRefreshListener {
+            clickUpdate()
         }
     }
 
@@ -49,6 +53,12 @@ class MainActivity : AppCompatActivity() {
         mainPresenter.detachView()
     }
 
+    private fun clickUpdate() {
+        mainPresenter.updateData()
+        if (binding.swipeUpdate.isRefreshing) {
+            binding.swipeUpdate.isRefreshing = false
+        }
+    }
     fun updateView(temp: String?, place: String?, date: String?, icon: IconCode) {
         snackBarHide()
         binding.tempWeather.text = temp
@@ -105,20 +115,6 @@ class MainActivity : AppCompatActivity() {
 
         Log.i("TEST_LOG", "${longitude} :: ${latitude}")
         return Pair(longitude.toString(), latitude.toString())
-    }
-
-    fun showProgressBar() {
-        binding.tempWeather.visibility = View.INVISIBLE
-        binding.placeWeather.visibility = View.INVISIBLE
-        binding.dateUpdateWeather.visibility = View.INVISIBLE
-        binding.progressBar.visibility = ProgressBar.VISIBLE
-    }
-
-    fun hideProgressBar() {
-        binding.tempWeather.visibility = View.VISIBLE
-        binding.placeWeather.visibility = View.VISIBLE
-        binding.dateUpdateWeather.visibility = View.VISIBLE
-        binding.progressBar.visibility = ProgressBar.INVISIBLE
     }
 
     fun snackBarWithError(errorCode: ErrorCode) {
