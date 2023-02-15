@@ -12,7 +12,7 @@ class MainPresenter: CallbackModel {
     }
 
     fun updateData() {
-
+        model.getData()
     }
 
     override fun successful(data: WeatherInfo) {

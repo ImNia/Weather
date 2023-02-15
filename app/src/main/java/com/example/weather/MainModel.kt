@@ -1,6 +1,5 @@
 package com.example.weather
 
-import com.example.weather.source.openweather.OpenWeather
 import com.example.weather.source.openweather.OpenWeatherRequest
 import com.example.weather.source.openweather.OpenWeatherSetting
 import com.example.weather.source.openweather.WeatherInfo

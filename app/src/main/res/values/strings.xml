@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Weather</string>
+    <string name="weather_text">Unknown</string>
+    <string name="place_text">Unknown place</string>
+    <string name="date_text">Unknown date</string>
+    <string name="button_update_text">Update</string>
+
+    <string name="icon_russian_federation">Icon to change the language to Russian</string>
+    <string name="icon_usa">Icon to change the language to English</string>
 </resources>

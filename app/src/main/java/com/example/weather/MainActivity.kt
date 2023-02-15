@@ -3,7 +3,6 @@ package com.example.weather
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.weather.databinding.ActivityMainBinding
-import com.example.weather.source.openweather.OpenWeather
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainPresenter: MainPresenter
@@ -18,7 +17,15 @@ class MainActivity : AppCompatActivity() {
         mainPresenter.attachView(this)
 
         binding.updateButton.setOnClickListener {
+            mainPresenter.updateData()
+        }
 
+        binding.russianFederationFlag.setOnClickListener {
+            println("Click on RUS")
+        }
+
+        binding.usaFlag.setOnClickListener {
+            println("Click on USA")
         }
     }
 
@@ -26,6 +33,5 @@ class MainActivity : AppCompatActivity() {
         binding.tempWeather.text = temp
         binding.placeWeather.text = place
         binding.dateUpdateWeather.text = date
-        println("$temp, $place, $date")
     }
 }

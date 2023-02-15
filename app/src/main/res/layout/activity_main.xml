@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,13 +18,19 @@
             android:id="@+id/russian_federation_flag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/russian_federation" />
+            android:src="@drawable/russian_federation"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/icon_russian_federation" />
 
         <ImageView
             android:id="@+id/usa_flag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/usa" />
+            android:src="@drawable/usa"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/icon_usa" />
     </LinearLayout>
 
     <LinearLayout
@@ -36,8 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
-            android:textSize="40sp"
-            android:text="Weather"
+            android:textSize="@dimen/text_weather_size"
+            android:text="@string/weather_text"
             android:gravity="center"/>
 
         <TextView
@@ -45,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Place"
+            android:text="@string/place_text"
             android:gravity="center"/>
 
         <TextView
@@ -53,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Date"
+            android:text="@string/date_text"
             android:gravity="center"/>
 
         <Button
@@ -61,7 +68,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Update"/>
+            android:text="@string/button_update_text"
+            android:layout_marginHorizontal="@dimen/button_padding"
+            app:cornerRadius="@dimen/button_corner_radius" />
     </LinearLayout>
 
 </LinearLayout>
