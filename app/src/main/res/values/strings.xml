@@ -7,4 +7,12 @@
 
     <string name="icon_russian_federation">Icon to change the language to Russian</string>
     <string name="icon_usa">Icon to change the language to English</string>
+
+    <string name="data_not_load">Ошибка подключения сети</string>
+    <string name="retry_on_error">Повторить</string>
+    <string name="server_error">Ошибка сервера</string>
+    <string name="request_timeout_error">Медленное соединение</string>
+    <string name="conflict_value_error">Не удалось распознать ответ от сервер</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="unknown_location">Неудалось определить местоположение</string>
 </resources>

@@ -7,6 +7,9 @@ import com.example.weather.source.openweather.model.OpenWeatherDTO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
+import java.util.Calendar
 import kotlin.math.roundToInt
 
 class MainModel(val callbackModel: CallbackModel) {
@@ -14,12 +17,21 @@ class MainModel(val callbackModel: CallbackModel) {
     private val weatherRequest: OpenWeatherRequest = OpenWeatherSetting.createRequest
     private var data: OpenWeatherDTO? = null
 
-    fun getData() {
-        weatherRequest.getWeather().enqueue(object : Callback<OpenWeatherDTO> {
+    fun getData(longitude: String, latitude: String) {
+        weatherRequest.getWeather(latitude, longitude, "1537e17da89b2fe3c52106b4654e00b3").enqueue(object : Callback<OpenWeatherDTO> {
             override fun onFailure(call: Call<OpenWeatherDTO>, t: Throwable) {
+                when(t) {
+                    is SocketTimeoutException -> {
+                        callbackModel.failed(ErrorCode.REQUEST_TIMEOUT)
+                    }
+                    is UnknownHostException -> {
+                        callbackModel.failed(ErrorCode.NOT_CONNECT)
+                    }
+                    else -> {
+                        callbackModel.failed(ErrorCode.SOME_ERROR)
+                    }
+                }
                 t.printStackTrace()
-                //TODO Add exception
-                println("In error")
             }
 
             override fun onResponse(
@@ -29,11 +41,10 @@ class MainModel(val callbackModel: CallbackModel) {
                 println(response.raw())
                 if (response.isSuccessful) {
                     data = response.body() as OpenWeatherDTO
-                    println(data)
                     //TODO check what value exist
                     callbackModel.successful(handleData(data!!))
                 } else {
-                    println("Is not successful")
+                    callbackModel.failed(ErrorCode.INCORRECT_REQUEST)
                 }
             }
         })
@@ -44,7 +55,7 @@ class MainModel(val callbackModel: CallbackModel) {
         return WeatherInfo(
             temp = tempKelvinToCelsius(data.main?.temp),
             place = data.name,
-            date = data.timezone
+            date = Calendar.getInstance().time.toString()
         )
     }
     private fun tempKelvinToCelsius(temp: String?): String? {

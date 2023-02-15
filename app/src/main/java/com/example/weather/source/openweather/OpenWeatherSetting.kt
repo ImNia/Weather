@@ -5,6 +5,8 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 object OpenWeatherSetting  {
     //TODO change address
@@ -29,6 +31,11 @@ object RetrofitClient {
 }
 
 interface OpenWeatherRequest{
-    @GET("?lat=55.02&lon=82.93&appid=1537e17da89b2fe3c52106b4654e00b3")
-    fun getWeather(): Call<OpenWeatherDTO>
+    @GET("?")
+//    @GET("?lat={lat}&lon={lon}&appid=1537e17da89b2fe3c52106b4654e00b3")
+    fun getWeather(
+        @Query("lat") lat: String,
+        @Query("lon") lon: String,
+        @Query("appid") appid: String
+    ): Call<OpenWeatherDTO>
 }

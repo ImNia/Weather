@@ -8,18 +8,30 @@ class MainPresenter: CallbackModel {
 
     fun attachView(view: MainActivity) {
         this.view = view
-        model.getData()
+    }
+    fun detachView() {
+        view = null
+    }
+
+    fun startView() {
+        updateData()
     }
 
     fun updateData() {
-        model.getData()
+        view?.showProgressBar()
+        val locationData = view?.getLocation()
+//        (longitude, latitude)
+        if(locationData?.first != null || locationData?.second != null) {
+            model.getData(locationData.first, locationData.second)
+        }
     }
 
     override fun successful(data: WeatherInfo) {
+        view?.hideProgressBar()
         view?.updateView(data.temp, data.place, data.date)
     }
 
-    override fun failed(message: String?) {
-        TODO("Not yet implemented")
+    override fun failed(errorCode: ErrorCode) {
+        view?.snackBarWithError(errorCode)
     }
 }
