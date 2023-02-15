@@ -55,7 +55,8 @@ class MainModel(val callbackModel: CallbackModel) {
         return WeatherInfo(
             temp = tempKelvinToCelsius(data.main?.temp),
             place = data.name,
-            date = Calendar.getInstance().time.toString()
+            date = Calendar.getInstance().time.toString(),
+            weatherToIcon = data.weather?.first()?.id
         )
     }
     private fun tempKelvinToCelsius(temp: String?): String? {

@@ -49,11 +49,25 @@ class MainActivity : AppCompatActivity() {
         mainPresenter.detachView()
     }
 
-    fun updateView(temp: String?, place: String?, date: String?) {
+    fun updateView(temp: String?, place: String?, date: String?, icon: IconCode) {
         snackBarHide()
         binding.tempWeather.text = temp
         binding.placeWeather.text = place
         binding.dateUpdateWeather.text = date
+        binding.tempWeather.setCompoundDrawablesWithIntrinsicBounds(
+            0, 0, 0, getIconId(icon)
+        )
+    }
+
+    private fun getIconId(icon: IconCode) : Int {
+        return when (icon) {
+            IconCode.SUN -> R.drawable.sun
+            IconCode.RAIN -> R.drawable.rain
+            IconCode.SNOW -> R.drawable.snow
+            IconCode.MIST -> R.drawable.mist
+            IconCode.CLOUD -> R.drawable.cloud
+            IconCode.UNDEFINE -> 0
+        }
     }
 
     fun getLocation() : Pair<String, String> {

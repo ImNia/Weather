@@ -28,7 +28,22 @@ class MainPresenter: CallbackModel {
 
     override fun successful(data: WeatherInfo) {
         view?.hideProgressBar()
-        view?.updateView(data.temp, data.place, data.date)
+        view?.updateView(data.temp, data.place, data.date, iconToCode(data.weatherToIcon))
+    }
+
+    private fun iconToCode(weather: String?) : IconCode {
+        val id = weather?.toInt()
+        if (id != null) {
+            return when {
+                id < 600 -> IconCode.RAIN
+                id in 600..699 -> IconCode.SNOW
+                id in 700..799 -> IconCode.MIST
+                id == 800 -> IconCode.SUN
+                id > 800 -> IconCode.CLOUD
+                else -> IconCode.UNDEFINE
+            }
+        }
+        return IconCode.UNDEFINE
     }
 
     override fun failed(errorCode: ErrorCode) {
