@@ -2,7 +2,6 @@ package com.example.weather
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
@@ -12,7 +11,6 @@ import androidx.core.app.ActivityCompat
 import com.example.weather.databinding.ActivityMainBinding
 import com.example.weather.locale.LocaleHelper
 import com.google.android.material.snackbar.Snackbar
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainPresenter: MainPresenter
@@ -70,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         binding.placeWeather.text = place
         binding.dateUpdateWeather.text = date
         binding.tempWeather.setCompoundDrawablesWithIntrinsicBounds(
-            0, 0, 0, getIconId(icon)
+            getIconId(icon), 0, 0, 0
         )
     }
 
@@ -111,14 +109,12 @@ class MainActivity : AppCompatActivity() {
         for (provider in providers) {
             val l: Location = locationManager.getLastKnownLocation(provider) ?: continue
             if (bestLocation == null || l.accuracy < bestLocation.accuracy) {
-                // Found best last known location: %s", l);
                 bestLocation = l
             }
         }
         val longitude = bestLocation?.longitude
         val latitude = bestLocation?.latitude
 
-        Log.i("TEST_LOG", "${longitude} :: ${latitude}")
         return Pair(longitude.toString(), latitude.toString())
     }
 
