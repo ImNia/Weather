@@ -58,6 +58,7 @@ class MainModel(val callbackModel: CallbackModel) {
             date = Calendar.getInstance().time.toString(),
             weatherToIcon = data.weather?.first()?.id
         )
+
     }
     private fun tempKelvinToCelsius(temp: String?): String? {
         return temp?.let { (it.toDouble() - KALVIN_CONST).roundToInt().toString() }
