@@ -2,16 +2,17 @@ package com.example.weather
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.weather.databinding.ActivityMainBinding
+import com.example.weather.locale.LocaleHelper
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainPresenter: MainPresenter
@@ -31,11 +32,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.russianFederationFlag.setOnClickListener {
-            println("Click on RUS")
+            val context = LocaleHelper().setLocale(this, "ru")
+            val resources = context?.resources
+            binding.updateButton.text = resources?.getString(R.string.button_update_text)
         }
 
         binding.usaFlag.setOnClickListener {
-            println("Click on USA")
+            val context = LocaleHelper().setLocale(this, "en")
+            val resources = context?.resources
+            binding.updateButton.text = resources?.getString(R.string.button_update_text)
         }
 
         binding.swipeUpdate.setOnRefreshListener {

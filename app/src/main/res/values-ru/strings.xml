@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="weather_text">Не определено</string>
+    <string name="place_text">Не определено</string>
+    <string name="date_text">Не определено</string>
+    <string name="button_update_text">Обновить</string>
+    <string name="icon_russian_federation">Изменить язык на Русский</string>
+    <string name="icon_usa">Изменить язык на Английский</string>
+    <string name="data_not_load">Ошибка подключения сети</string>
+    <string name="retry_on_error">Повторить</string>
+    <string name="server_error">Ошибка сервера</string>
+    <string name="request_timeout_error">Медленное соединение</string>
+    <string name="conflict_value_error">Не удалось распознать ответ от сервер</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="unknown_location">Неудалось определить местоположение</string>
+</resources>
